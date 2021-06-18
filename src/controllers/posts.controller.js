@@ -10,7 +10,7 @@ export async function createPost(req, res) {
             picture,
             category
         }, {
-            fields: ['title', 'content', 'pciture', 'category']
+            fields: ['title', 'content', 'picture', 'category']
         });
         if(newPost) {
             return res.json({
