@@ -80,7 +80,10 @@ export async function deletePost(req, res) {
 export async function getPosts(req, res) {
     try {
         const allPosts = await posts.findAll({
-            attributes: ['title', 'content', 'picture', 'category']
+            order: [
+                ['createdAt', 'DESC']
+            ],
+            attributes: ['id', 'title', 'picture', 'category', 'createdAt']
         });
         return res.json({
             data: allPosts
