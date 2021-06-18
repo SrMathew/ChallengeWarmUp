@@ -1,6 +1,8 @@
 import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 
+import posts from './posts';
+
 const categories = sequelize.define('categories', {
     id: {
         type: Sequelize.INTEGER,
@@ -9,7 +11,7 @@ const categories = sequelize.define('categories', {
         unique: true
     },
     type: {
-        ype: Sequelize.TEXT,
+        type: Sequelize.TEXT,
         allowNull: false,
         unique: true,
         validate: {
@@ -22,9 +24,20 @@ const categories = sequelize.define('categories', {
                 msg: "Type cannot be empty"
             }
         }
+    },
+    postsid: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: posts,
+            key: 'id'
+        }
     }
 }, {
     timestamps: true
 });
+
+posts.hasMany(categories);
+categories.belongsTo(posts);
 
 export default categories;

@@ -41,9 +41,6 @@ const posts = sequelize.define('posts', {
                 msg: "Picture url cannot be empty"
             }
         }
-    },
-    category: {
-
     }
 }, {
     timestamps: true
