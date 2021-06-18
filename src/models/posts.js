@@ -30,7 +30,6 @@ const posts = sequelize.define('posts', {
     picture: {
         type: Sequelize.TEXT,
         allowNull: false,
-        unique: true,
         validate: {
             notNull:{
                 args: true,
@@ -41,6 +40,10 @@ const posts = sequelize.define('posts', {
                 msg: "Picture url cannot be empty"
             }
         }
+    },
+    category: {
+        type: Sequelize.TEXT,
+        allowNull: false
     }
 }, {
     timestamps: true
