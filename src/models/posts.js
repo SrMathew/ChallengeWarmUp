@@ -1,28 +1,52 @@
 import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 
-const characters = sequelize.define('posts', {
+const posts = sequelize.define('posts', {
     id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true,
+        unique: true
     },
     title: {
         type: Sequelize.TEXT,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            notNull:{
+                args: true,
+                msg: "Title cannot be null"
+            },
+            notEmpty:{
+                args: true,
+                msg: "Title cannot be empty"
+            }
+        }
     },
     content: {
-
+        type: Sequelize.TEXT,
+        allowNull: false
     },
     picture: {
-        type: Sequelize.BLOB
+        type: Sequelize.TEXT,
+        allowNull: false,
+        unique: true,
+        validate: {
+            notNull:{
+                args: true,
+                msg: "Picture url cannot be null"
+            },
+            notEmpty:{
+                args: true,
+                msg: "Picture url cannot be empty"
+            }
+        }
     },
     category: {
 
-    },
-    creationDate: {
-        
     }
 }, {
-    timestamps: false
+    timestamps: true
 });
+
+export default posts;
